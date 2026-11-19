@@ -58,6 +58,30 @@ namespace CollectiveSoftwareDevelopmentLab6_25VP2_Group3
                 optimalInd.Text = "не найдено";
             else
                 optimalInd.Text = result.ToString();
+
+            //Последовательный бинарный поиск
+            long jump;
+            result = -1;
+            StartTime = Environment.TickCount;
+            for (long i = 0; i < Repeats; i++)
+            {
+                ind = 0;
+                jump = N / 2;
+                while (jump > 0)
+                {
+                    while ((ind + jump < N) && (mas[ind + jump] <= key))
+                        ind += jump;
+                    jump /= 2;
+                }
+                if (key == mas[ind])
+                    result = ind;
+            }
+            ResultTime = Environment.TickCount - StartTime;
+            linearlikeBinTime.Text = ResultTime.ToString();
+            if (result == -1)
+                linearlikeBinInd.Text = "не найдено";
+            else
+                linearlikeBinInd.Text = result.ToString();
         }
     }
 }
