@@ -1,4 +1,6 @@
-namespace WinFormLab5_7Maksimov25VP2
+using System.Windows.Forms;
+
+namespace CollectiveSoftwareDevelopmentLab6_25VP2_Group3
 {
     public partial class Form1 : Form
     {
@@ -27,7 +29,35 @@ namespace WinFormLab5_7Maksimov25VP2
 
         private void findBtn_Click(object sender, EventArgs e)
         {
-             
+            long result = -1;
+            long key = (int)keyInput.Value;
+            //Оптимальный бинарный поиск
+            result = -1;
+            StartTime = Environment.TickCount;
+            for (long i = 0; i < Repeats; i++)
+            {
+                long Le = 0;
+                long Ri = N - 1;
+                while (Le < Ri)
+                {
+                    ind = (Le + Ri) / 2;
+                    if (key <= mas[ind])
+                        Ri = ind;
+                    else
+                        Le = ind + 1;
+                }
+                if (mas[Ri] == key)
+                {
+                    result = Ri;
+                }
+            }
+
+            ResultTime = Environment.TickCount - StartTime;
+            optimalTime.Text = ResultTime.ToString();
+            if (result == -1)
+                optimalInd.Text = "не найдено";
+            else
+                optimalInd.Text = result.ToString();
         }
     }
 }
