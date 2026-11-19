@@ -27,7 +27,46 @@ namespace WinFormLab5_7Maksimov25VP2
 
         private void findBtn_Click(object sender, EventArgs e)
         {
-             
+            //неоптимальный бинарный поиск
+            bool foundA = false;
+            int i = 0;
+            int StartTimeA = Environment.TickCount;
+            for (long r = 0; r < Repeats; r++)
+            {
+                foundA = false;
+                long L = 0;
+                long R = N - 1;
+
+                while (R >= L)
+                {
+                    i = (int)((L + R) / 2); 
+                    if (key == mas[i])
+                    {
+                        foundA = true;
+                        break;
+                    }
+                    else if (key < mas[i])
+                    {
+                        R = i - 1;
+                    }
+                    else
+                    {
+                        L = i + 1;
+                    }
+                }
+            }
+
+            int ResultTimeA = Environment.TickCount - StartTimeA;
+            basicTime.Text = ResultTimeA.ToString();
+
+            if (foundA)
+            {
+                baisicInd.Text = i.ToString();
+            }
+            else
+            {
+                baisicInd.Text = "Поиск неудачен!";
+            }
         }
     }
 }
