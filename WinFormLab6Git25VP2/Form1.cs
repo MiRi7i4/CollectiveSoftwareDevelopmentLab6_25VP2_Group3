@@ -29,9 +29,50 @@ namespace CollectiveSoftwareDevelopmentLab6_25VP2_Group3
 
         private void findBtn_Click(object sender, EventArgs e)
         {
+            //Ã­Ã¥Ã®Ã¯Ã²Ã¨Ã¬Ã Ã«Ã¼Ã­Ã»Ã© Ã¡Ã¨Ã­Ã Ã°Ã­Ã»Ã© Ã¯Ã®Ã¨Ã±Ãª
+            bool foundA = false;
+            int i = 0;
+            int StartTimeA = Environment.TickCount;
+            for (long r = 0; r < Repeats; r++)
+            {
+                foundA = false;
+                long L = 0;
+                long R = N - 1;
+
+                while (R >= L)
+                {
+                    i = (int)((L + R) / 2); 
+                    if (key == mas[i])
+                    {
+                        foundA = true;
+                        break;
+                    }
+                    else if (key < mas[i])
+                    {
+                        R = i - 1;
+                    }
+                    else
+                    {
+                        L = i + 1;
+                    }
+                }
+            }
+
+            int ResultTimeA = Environment.TickCount - StartTimeA;
+            basicTime.Text = ResultTimeA.ToString();
+
+            if (foundA)
+            {
+                baisicInd.Text = i.ToString();
+            }
+            else
+            {
+                baisicInd.Text = "ÃÃ®Ã¨Ã±Ãª Ã­Ã¥Ã³Ã¤Ã Ã·Ã¥Ã­!";
+            }
+            
             long result = -1;
             long key = (int)keyInput.Value;
-            //Îïòèìàëüíûé áèíàðíûé ïîèñê
+            //ÃŽÃ¯Ã²Ã¨Ã¬Ã Ã«Ã¼Ã­Ã»Ã© Ã¡Ã¨Ã­Ã Ã°Ã­Ã»Ã© Ã¯Ã®Ã¨Ã±Ãª
             result = -1;
             StartTime = Environment.TickCount;
             for (long i = 0; i < Repeats; i++)
@@ -55,11 +96,11 @@ namespace CollectiveSoftwareDevelopmentLab6_25VP2_Group3
             ResultTime = Environment.TickCount - StartTime;
             optimalTime.Text = ResultTime.ToString();
             if (result == -1)
-                optimalInd.Text = "íå íàéäåíî";
+                optimalInd.Text = "Ã­Ã¥ Ã­Ã Ã©Ã¤Ã¥Ã­Ã®";
             else
                 optimalInd.Text = result.ToString();
 
-            //Ïîñëåäîâàòåëüíûé áèíàðíûé ïîèñê
+            //ÃÃ®Ã±Ã«Ã¥Ã¤Ã®Ã¢Ã Ã²Ã¥Ã«Ã¼Ã­Ã»Ã© Ã¡Ã¨Ã­Ã Ã°Ã­Ã»Ã© Ã¯Ã®Ã¨Ã±Ãª
             long jump;
             result = -1;
             StartTime = Environment.TickCount;
@@ -79,7 +120,7 @@ namespace CollectiveSoftwareDevelopmentLab6_25VP2_Group3
             ResultTime = Environment.TickCount - StartTime;
             linearlikeBinTime.Text = ResultTime.ToString();
             if (result == -1)
-                linearlikeBinInd.Text = "íå íàéäåíî";
+                linearlikeBinInd.Text = "Ã­Ã¥ Ã­Ã Ã©Ã¤Ã¥Ã­Ã®";
             else
                 linearlikeBinInd.Text = result.ToString();
         }
