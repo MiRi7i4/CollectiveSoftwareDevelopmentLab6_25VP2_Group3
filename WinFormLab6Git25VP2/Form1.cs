@@ -1,4 +1,6 @@
-namespace WinFormLab5_7Maksimov25VP2
+using System.Windows.Forms;
+
+namespace CollectiveSoftwareDevelopmentLab6_25VP2_Group3
 {
     public partial class Form1 : Form
     {
@@ -27,7 +29,7 @@ namespace WinFormLab5_7Maksimov25VP2
 
         private void findBtn_Click(object sender, EventArgs e)
         {
-            //������������� �������� �����
+            //íåîïòèìàëüíûé áèíàðíûé ïîèñê
             bool foundA = false;
             int i = 0;
             int StartTimeA = Environment.TickCount;
@@ -65,8 +67,62 @@ namespace WinFormLab5_7Maksimov25VP2
             }
             else
             {
-                baisicInd.Text = "����� ��������!";
+                baisicInd.Text = "Ïîèñê íåóäà÷åí!";
             }
+            
+            long result = -1;
+            long key = (int)keyInput.Value;
+            //Îïòèìàëüíûé áèíàðíûé ïîèñê
+            result = -1;
+            StartTime = Environment.TickCount;
+            for (long i = 0; i < Repeats; i++)
+            {
+                long Le = 0;
+                long Ri = N - 1;
+                while (Le < Ri)
+                {
+                    ind = (Le + Ri) / 2;
+                    if (key <= mas[ind])
+                        Ri = ind;
+                    else
+                        Le = ind + 1;
+                }
+                if (mas[Ri] == key)
+                {
+                    result = Ri;
+                }
+            }
+
+            ResultTime = Environment.TickCount - StartTime;
+            optimalTime.Text = ResultTime.ToString();
+            if (result == -1)
+                optimalInd.Text = "íå íàéäåíî";
+            else
+                optimalInd.Text = result.ToString();
+
+            //Ïîñëåäîâàòåëüíûé áèíàðíûé ïîèñê
+            long jump;
+            result = -1;
+            StartTime = Environment.TickCount;
+            for (long i = 0; i < Repeats; i++)
+            {
+                ind = 0;
+                jump = N / 2;
+                while (jump > 0)
+                {
+                    while ((ind + jump < N) && (mas[ind + jump] <= key))
+                        ind += jump;
+                    jump /= 2;
+                }
+                if (key == mas[ind])
+                    result = ind;
+            }
+            ResultTime = Environment.TickCount - StartTime;
+            linearlikeBinTime.Text = ResultTime.ToString();
+            if (result == -1)
+                linearlikeBinInd.Text = "íå íàéäåíî";
+            else
+                linearlikeBinInd.Text = result.ToString();
         }
     }
 }
