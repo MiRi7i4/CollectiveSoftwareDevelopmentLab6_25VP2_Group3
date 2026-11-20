@@ -100,6 +100,38 @@ namespace CollectiveSoftwareDevelopmentLab6_25VP2_Group3
             else
                 optimalInd.Text = result.ToString();
 
+            //Интерполяционный бинарный поиск
+            result = -1;
+            StartTime = Environment.TickCount;
+            for (long i = 0; i < Repeats; i++)
+            {
+                long Le = 0;
+                long Ri = N - 1;
+                while ((mas[Le] < key) && (mas[Ri] > key))
+                {
+                    long index = Le + (Ri - Le) * (key - mas[Le]) / (mas[Ri] - mas[Le]);
+                    if (key == mas[index])
+                    {
+                        result = index;
+                        break;
+                    }
+                    if (key < mas[index])
+                        Ri = index - 1;
+                    else
+                        Le = index + 1;
+                }
+                if (key == mas[Le])
+                    result = Le;
+                else if (key == mas[Ri])
+                    result = Ri;
+            }
+            ResultTime = Environment.TickCount - StartTime;
+            interpolTime.Text = ResultTime.ToString();
+            if (result == -1)
+                interpolInd.Text = "не найдено";
+            else
+                interpolInd.Text = result.ToString();
+
             //Ïîñëåäîâàòåëüíûé áèíàðíûé ïîèñê
             long jump;
             result = -1;
