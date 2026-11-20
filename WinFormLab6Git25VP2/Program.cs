@@ -1,4 +1,4 @@
-namespace WinFormLab5_7Maksimov25VP2
+namespace CollectiveSoftwareDevelopmentLab6_25VP2_Group3
 {
     internal static class Program
     {
