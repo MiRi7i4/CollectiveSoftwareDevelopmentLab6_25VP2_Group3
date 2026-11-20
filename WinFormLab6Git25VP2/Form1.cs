@@ -29,50 +29,49 @@ namespace CollectiveSoftwareDevelopmentLab6_25VP2_Group3
 
         private void findBtn_Click(object sender, EventArgs e)
         {
-            //íåîïòèìàëüíûé áèíàðíûé ïîèñê
-            bool foundA = false;
-            int i = 0;
-            int StartTimeA = Environment.TickCount;
+            long result = -1;
+            long key = (int)keyInput.Value;
+            //Неоптимальный бинарный поиск
+            long ind = 0;
+            int StartTime = Environment.TickCount;
             for (long r = 0; r < Repeats; r++)
             {
-                foundA = false;
                 long L = 0;
                 long R = N - 1;
 
                 while (R >= L)
                 {
-                    i = (int)((L + R) / 2); 
-                    if (key == mas[i])
+                    ind = (int)((L + R) / 2); 
+                    if (key == mas[ind])
                     {
-                        foundA = true;
+                        result = ind;
                         break;
                     }
-                    else if (key < mas[i])
+                    else if (key < mas[ind])
                     {
-                        R = i - 1;
+                        R = ind - 1;
                     }
                     else
                     {
-                        L = i + 1;
+                        L = ind + 1;
                     }
                 }
             }
 
-            int ResultTimeA = Environment.TickCount - StartTimeA;
-            basicTime.Text = ResultTimeA.ToString();
+            int ResultTime = Environment.TickCount - StartTime;
+            basicTime.Text = ResultTime.ToString();
 
-            if (foundA)
+            if (result!=-1)
             {
-                baisicInd.Text = i.ToString();
+                baisicInd.Text = ind.ToString();
             }
             else
             {
-                baisicInd.Text = "Ïîèñê íåóäà÷åí!";
+                baisicInd.Text = "не найдено";
             }
-            
-            long result = -1;
-            long key = (int)keyInput.Value;
-            //Îïòèìàëüíûé áèíàðíûé ïîèñê
+
+
+            //Оптимальный бинарный поиск
             result = -1;
             StartTime = Environment.TickCount;
             for (long i = 0; i < Repeats; i++)
@@ -96,7 +95,7 @@ namespace CollectiveSoftwareDevelopmentLab6_25VP2_Group3
             ResultTime = Environment.TickCount - StartTime;
             optimalTime.Text = ResultTime.ToString();
             if (result == -1)
-                optimalInd.Text = "íå íàéäåíî";
+                optimalInd.Text = "не найдено";
             else
                 optimalInd.Text = result.ToString();
 
@@ -132,7 +131,7 @@ namespace CollectiveSoftwareDevelopmentLab6_25VP2_Group3
             else
                 interpolInd.Text = result.ToString();
 
-            //Ïîñëåäîâàòåëüíûé áèíàðíûé ïîèñê
+            //Последовательный бинарный поиск
             long jump;
             result = -1;
             StartTime = Environment.TickCount;
@@ -152,7 +151,7 @@ namespace CollectiveSoftwareDevelopmentLab6_25VP2_Group3
             ResultTime = Environment.TickCount - StartTime;
             linearlikeBinTime.Text = ResultTime.ToString();
             if (result == -1)
-                linearlikeBinInd.Text = "íå íàéäåíî";
+                linearlikeBinInd.Text = "не найдено";
             else
                 linearlikeBinInd.Text = result.ToString();
         }
